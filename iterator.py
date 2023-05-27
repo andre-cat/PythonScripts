@@ -1,11 +1,17 @@
-from typing import Iterator
+numbers : list[int] = [1, 2, 3, 4, 5]
 
-numbers: list[int] = [1, 2, 3]
+# this doesn't save memory
+for number in numbers:
+    print(number)
 
-iterator: Iterator[int] = iter(numbers)
+# this save memory
+iterator = iter(numbers)
+for number in iterator:
+    print(number)
 
-for _ in range(len(numbers)):
-    next_ = next(iterator)
-    print(next_)
-    if next_ == None:
-        iterator = iter(list(iterator))
+try:
+    iterator = iter(numbers)
+    for number in range(len(numbers)+1):
+        print(next(iterator))
+except Exception as e:
+    print('StopIteration')
